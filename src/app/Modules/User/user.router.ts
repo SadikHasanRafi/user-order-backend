@@ -5,14 +5,19 @@ import { userController } from "./user.controller"
 const userRoute = Router()
 
 
-userRoute.get('/',userController.getAllUsersFromDB  )
+userRoute.get('/',userController.getAllUsers  )
 
 userRoute.post("/create-new-user", userController.createNewUser )
 
+userRoute.get("/:userId",userController.getSingleUser )
 
-
-
+userRoute.put("/:userId",userController.updateSingleUser)
 
 
 
 export default userRoute
+
+
+
+
+

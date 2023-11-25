@@ -1,5 +1,5 @@
-import mongoose, { Schema } from 'mongoose';
-import { Address, Orders, User } from './user.interface';
+import  {  Schema, model } from 'mongoose';
+import { Address, Orders, User, UserMethods,  UserModel } from './user.interface';
 
 
 const addressSchema = new Schema<Address>({
@@ -14,7 +14,8 @@ const orderSchema = new Schema<Orders>({
   quantity: { type: Number },
 });
 
-const userSchema = new Schema<User>({
+
+const userSchema = new Schema<User,UserModel,UserMethods>({
   userId: { type: Number, unique: true },
   username: { type: String, unique: true },
   password: { type: String },
@@ -29,6 +30,17 @@ const userSchema = new Schema<User>({
   address: { type: addressSchema },
   orders: { type: [orderSchema] },
 });
+
+userSchema.method('isUserExists', async  function isUserExists(userId:number) {
+
+  // const existingUser = await Student.findOne({ userId });
+
+  return userId;
+
+});
+
+
+
 
 
 userSchema.pre('find', function (next) {
@@ -45,6 +57,8 @@ userSchema.pre('find', function (next) {
 
 
 
-const UserModel = mongoose.model<User>('User', userSchema);
+const UserModel = model<User,UserModel>('User', userSchema);
+
+
 
 export default UserModel;

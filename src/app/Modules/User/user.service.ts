@@ -14,8 +14,52 @@ const getAllUsersFromDB = async ()=>{
     return result
 }
 
+const getSingleDataFromDB = async ( userId:number ) => {
+    const user = new UserModel()
+    if (await user.isUserExists(userId)) {
+        const data = await UserModel.findOne({
+            userId:userId
+        })
+        return data
+    }
+
+    return null
+    
+}
+
+//todo start work from here update a single data 
+//todo here I have to get specific that field that has not been updated
+const updateSingleUserInDB = async (userId:number) =>{
+    const user = new UserModel()
+
+    if (await user.isUserExists(userId)) {
+        const data = await UserModel.updateOne(
+          
+            { userId:userId },
+            
+                        {
+                          $set: {
+                            plot: `A harvest of random numbers, such as: ${Math.random()}`,
+                          },
+                        },
+
+
+            /* Set the upsert option to insert a document if no documents
+            match the filter */
+            { upsert: false }
+
+
+        )
+        return data
+    }
+
+    return null
+}
+
 
 export const userService = {
     insertSingleUserIntoDB,
-    getAllUsersFromDB
+    getAllUsersFromDB,
+    getSingleDataFromDB,
+    updateSingleUserInDB
 }

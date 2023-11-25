@@ -1,3 +1,5 @@
+import { Model } from "mongoose";
+
 export interface Address {
     street: string;
     city: string;
@@ -25,3 +27,10 @@ export interface User {
     address: Address;
     orders: Orders[];
 }
+
+export interface UserMethods {
+    isUserExists(userId: number): Promise<User | null>;
+}
+
+
+export type UserModel = Model<User, {}, UserMethods>;
