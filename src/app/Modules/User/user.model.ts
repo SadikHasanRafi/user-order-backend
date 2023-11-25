@@ -30,6 +30,21 @@ const userSchema = new Schema<User>({
   orders: { type: [orderSchema] },
 });
 
+
+userSchema.pre('find', function (next) {
+  this.find().projection({
+    username: 1,
+    _id:0,
+    fullName: 1,
+    age: 1,
+    email: 1,
+    address: 1
+  })
+    next();
+});
+
+
+
 const UserModel = mongoose.model<User>('User', userSchema);
 
 export default UserModel;

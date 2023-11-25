@@ -5,10 +5,7 @@ import { userController } from "./user.controller"
 const userRoute = Router()
 
 
-userRoute.get('/', async (req:Request,res:Response)=>{
-    // console.log(req.url)
-    res.send({ bal : "res"})
-})
+userRoute.get('/',userController.getAllUsersFromDB  )
 
 userRoute.post("/create-new-user", userController.createNewUser )
 
