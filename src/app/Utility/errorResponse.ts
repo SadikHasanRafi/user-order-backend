@@ -6,5 +6,3 @@
 //         "description": "User not found!"
 //     }
 // }
-
-
