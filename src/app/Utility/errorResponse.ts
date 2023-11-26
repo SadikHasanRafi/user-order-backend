@@ -1,14 +1,6 @@
-// {
-//     "success": false,
-//     "message": "User not found",
-//     "error": {
-//         "code": 404,
-//         "description": "User not found!"
-//     }
-// }
 
-const errorMessage = (
-    success: string,
+export const errorMessageForServer = (
+    success: boolean,
     message: string,
     code: number,
     description: string
@@ -24,4 +16,3 @@ const errorMessage = (
 }
 
 
-export default errorMessage
