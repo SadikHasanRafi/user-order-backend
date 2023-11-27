@@ -1,17 +1,16 @@
 import Joi from "joi"
 
-
 const addressSchema = Joi.object({
   street: Joi.string().required(),
   city: Joi.string().required(),
   country: Joi.string().required(),
-});
+})
 
 const orderSchema = Joi.object({
   productName: Joi.string().required(),
   price: Joi.number().required(),
   quantity: Joi.number().required(),
-});
+})
 
 const userSchema = Joi.object({
   userId: Joi.number().required(),
@@ -27,5 +26,5 @@ const userSchema = Joi.object({
   hobbies: Joi.array().items(Joi.string()).required(),
   address: addressSchema.required(),
   orders: Joi.array().items(orderSchema),
-});
-export default userSchema;
+})
+export default userSchema

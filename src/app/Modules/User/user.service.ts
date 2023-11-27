@@ -2,7 +2,6 @@ import { User } from "./user.interface"
 import UserModel from "./user.model"
 
 const insertSingleUserIntoDB = async (userData: User) => {
-
   const result = await UserModel.create(userData)
   return result
 }
@@ -15,27 +14,28 @@ const getAllUsersFromDB = async () => {
 const getSingleDataFromDB = async (userId: number) => {
   const user = new UserModel()
   if (await user.isUserExists(userId)) {
-    const data = await UserModel.findOne({
-      userId: userId,
-    },{password:0})
+    const data = await UserModel.findOne(
+      {
+        userId: userId,
+      },
+      { password: 0 },
+    )
     return data
   }
-
   return null
 }
 
-
-const updateSingleUserInDB = async (userId: number,updatedData:User) => {
+const updateSingleUserInDB = async (userId: number, updatedData: User) => {
   const user = new UserModel()
 
-  if (await user.isUserExists(userId) && updatedData) {
+  if ((await user.isUserExists(userId)) && updatedData) {
     const { age } = updatedData
     const data = await UserModel.updateOne(
       { userId: userId },
 
       {
         $set: {
-          age: age ,
+          age: age,
         },
       },
       { upsert: false },
@@ -46,11 +46,11 @@ const updateSingleUserInDB = async (userId: number,updatedData:User) => {
   return null
 }
 
-const deleteSingleUserInDB = async ( userId:number ) => {
+const deleteSingleUserInDB = async (userId: number) => {
   const user = new UserModel()
 
-  if (await user.isUserExists(userId) ) {
-    const data = await UserModel.deleteOne({ userId: userId });
+  if (await user.isUserExists(userId)) {
+    const data = await UserModel.deleteOne({ userId: userId })
     return data
   }
 
@@ -62,5 +62,5 @@ export const userService = {
   getAllUsersFromDB,
   getSingleDataFromDB,
   updateSingleUserInDB,
-  deleteSingleUserInDB
+  deleteSingleUserInDB,
 }

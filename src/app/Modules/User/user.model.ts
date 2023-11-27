@@ -30,9 +30,12 @@ const userSchema = new Schema<User, UserModel, UserMethods>({
 })
 
 userSchema.method("isUserExists", async function isUserExists(userId: number) {
-  // const existingUser = await Student.findOne({ userId });
-
-  return userId
+  const existingUser = await UserModel.findOne({ userId })
+  if (existingUser) {
+    return false
+  } else {
+    return true
+  }
 })
 
 userSchema.pre("find", function (next) {
