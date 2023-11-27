@@ -12,7 +12,7 @@ const orderSchema = Joi.object({
   quantity: Joi.number().required(),
 })
 
-const userSchema = Joi.object({
+const userValidationSchema = Joi.object({
   userId: Joi.number().required(),
   username: Joi.string().required(),
   password: Joi.string().required(),
@@ -27,4 +27,4 @@ const userSchema = Joi.object({
   address: addressSchema.required(),
   orders: Joi.array().items(orderSchema),
 })
-export default userSchema
+export default userValidationSchema
