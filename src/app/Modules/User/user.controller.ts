@@ -11,7 +11,7 @@ const createNewUser = async (req: Request, res: Response) => {
     const data = req.body
     if (data) {
       const validationResult = userValidationSchema.validate(data)
-      if (validationResult.error === null) {
+      if (validationResult.value) {
         const newUser = await userService.insertSingleUserIntoDB(data)
         res
           .status(200)
@@ -23,7 +23,7 @@ const createNewUser = async (req: Request, res: Response) => {
             ),
           )
       } else {
-        console.log(validationResult.error)
+        res.status(400).send(validationResult.error?.details[0].message)
       }
     }
   } catch (error) {
