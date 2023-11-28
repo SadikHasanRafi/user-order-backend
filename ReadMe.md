@@ -9,7 +9,7 @@ Hey welcome here in my project. Here is my getting stated.
 - Then run the following code. Here my node version is 16.20.1
     
     ```npm i```
-- Then add your own mongo url in `.env file`. Here is my file format.
+- Then add your own mongo url in `.env file`. Here is my file format. Create this file into root directory
     ```
     DATABASE_URL = "****"
 

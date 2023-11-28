@@ -18,7 +18,7 @@
     "build": "tsc",
     "prettier": "prettier src --ignore-path  .gitignore --write \"**/*.+(js|ts|json)\"",
     "prettier-fix": "npx prettier --write src",
-    "start": "nodemon ./dist/app/server.js"
+    "start": "node ./dist/app/server.js"
   },
   "keywords": [],
   "author": "",
