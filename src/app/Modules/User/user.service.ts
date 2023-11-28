@@ -13,7 +13,8 @@ const getAllUsersFromDB = async () => {
 
 const getSingleDataFromDB = async (userId: number) => {
   const user = new UserModel()
-  if (await user.isUserExists(userId)) {
+  const response = await user.isUserExists(userId)
+  if (response) {
     const data = await UserModel.findOne(
       {
         userId: userId,

@@ -30,13 +30,29 @@ const userSchema = new Schema<User, UserModel, UserMethods>({
 })
 
 userSchema.method("isUserExists", async function isUserExists(userId: number) {
-  const existingUser = await UserModel.findOne({ userId })
+  const existingUser = await UserModel.findOne({ userId:userId })
   if (existingUser) {
-    return false
-  } else {
     return true
+  } else {
+    return false
   }
 })
+
+
+userSchema.method("isProductExists", async function isProductExists(userId: number,orders:Orders) {
+  // const existingUser = await UserModel.findOne({ userId })
+  const existingProduct:User | null = await UserModel.findOne({userId:userId})
+
+
+  if (existingProduct && existingProduct.orders.map((x:Orders)=>{if (x.productName === orders.productName) {return true}  }))
+   {
+    return true
+  } else {
+    return false
+  }
+})
+
+
 
 userSchema.pre("find", function (next) {
   this.find().projection({

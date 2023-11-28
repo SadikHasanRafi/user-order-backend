@@ -16,7 +16,7 @@
     "lint": "eslint --ext src --ignore-path .eslintignore .ts",
     "lint-fix": "npx eslint src --fix",
     "build": "tsc",
-    "prettier": "prettier --ignore-path src .gitignore --write \"**/*.+(js|ts|json)\"",
+    "prettier": "prettier src --ignore-path  .gitignore --write \"**/*.+(js|ts|json)\"",
     "prettier-fix": "npx prettier --write src",
     "start": "nodemon ./dist/app/server.js"
   },

@@ -29,7 +29,9 @@ export interface User {
 }
 
 export interface UserMethods {
-  isUserExists(userId: number): Promise<User | null>
+  isUserExists(userId: number): Promise<User | null>,
+  isProductExists(userId:number,orders:Orders):Promise<Orders|null>
 }
 
-export type UserModel = Model<User, {}, UserMethods>
+
+export type UserModel = Model<User, object, UserMethods>

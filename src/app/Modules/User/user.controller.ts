@@ -2,11 +2,12 @@ import { Request, Response } from "express"
 import { userService } from "./user.service"
 import { errorMessageForServer } from "../../Utility/errorResponse"
 import { successResponseForOperation } from "../../Utility/successResponse"
-import Joi from "joi"
 import userValidationSchema from "./user.validation"
+import { Orders } from "./user.interface"
+import { userOrderService } from "./Orders/orders.service"
+import UserModel from "./user.model"
 
 const createNewUser = async (req: Request, res: Response) => {
-  //todo start working from here plz
   try {
     const data = req.body
     if (data) {
@@ -122,7 +123,7 @@ const updateSingleUser = async (req: Request, res: Response) => {
 const deleteSingleUser = async (req: Request, res: Response) => {
   try {
     const userId = req.params.userId
-    const result = await userService.deleteSingleUserInDB(Number(userId))
+    await userService.deleteSingleUserInDB(Number(userId))
     res
       .status(200)
       .send(
@@ -139,10 +140,42 @@ const deleteSingleUser = async (req: Request, res: Response) => {
   }
 }
 
+const addNewOrder = async (req:Request,res:Response) => {
+  try {
+    const userId = req.params.userId
+    const data:Orders = req.body
+    const user = new UserModel()
+
+    if (!await user.isUserExists(Number(userId))) {
+      if (await user.isProductExists(Number(userId),data)) {
+        //add new product and send response
+        if (await userOrderService.addNewOrder(Number(userId),data)) {
+          res.status(200).send(successResponseForOperation(true,"Order Created Successfully",null))
+        }else{
+            res.status(404).send(errorMessageForServer(false,"Failed to create order.",404,"Failed to update."))
+        }
+  
+      }else{
+          res.status(404).send(errorMessageForServer(false,"Product already in your cart.",404,"Product already in your cart."))
+      }
+    }else{
+      res.status(404).send(errorMessageForServer(false,"User not found.",404,"User not found."))
+  }
+
+
+  } catch (error) {
+    console.log("🚀 ~ file: user.controller.ts:161 ~ addNewOrder ~ error:", error)
+    res.status(404).send(errorMessageForServer(false,"Failed to create order.",404,"Failed to update."))
+  }
+}
+
+
+
 export const userController = {
   createNewUser,
   getAllUsers,
   getSingleUser,
   updateSingleUser,
   deleteSingleUser,
+  addNewOrder
 }
