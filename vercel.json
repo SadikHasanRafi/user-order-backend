@@ -9,11 +9,11 @@
     "rewrites": [
       {
         "source": "/(.*)",
-        "destination": "./dist/app/server.js"
+        "destination": "./dist/app"
       },
       {
         "source": "/api/v1/(.*)",
-        "destination": "./dist/app/server.js"
+        "destination": "./dist/app"
       }
     ],
     "headers": [
