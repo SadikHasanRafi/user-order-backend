@@ -12,13 +12,13 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "start": "node ./dist/app/server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint --ext src --ignore-path .eslintignore .ts",
     "lint-fix": "npx eslint src --fix",
     "build": "tsc",
     "prettier": "prettier src --ignore-path  .gitignore --write \"**/*.+(js|ts|json)\"",
-    "prettier-fix": "npx prettier --write src",
-    "start": "node ./dist/app/server.js"
+    "prettier-fix": "npx prettier --write src"
   },
   "keywords": [],
   "author": "",
