@@ -2,18 +2,18 @@
     "version": 2,
     "builds": [
       {
-        "src": "server.js",
+        "src": "dist/app/server.js",
         "use": "@vercel/node"
       }
     ],
     "rewrites": [
       {
         "source": "/(.*)",
-        "destination": "./dist/app"
+        "destination": "/server.js"
       },
       {
         "source": "/api/v1/(.*)",
-        "destination": "./dist/app"
+        "destination": "dist/app/server.js"
       }
     ],
     "headers": [
