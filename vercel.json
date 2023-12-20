@@ -1,3 +1,42 @@
 {
-    "outputDirectory": "dist"
+    "version": 2,
+    "builds": [
+      {
+        "src": "server.js",
+        "use": "@vercel/node"
+      }
+    ],
+    "rewrites": [
+      {
+        "source": "/(.*)",
+        "destination": "./dist/app/server.js"
+      },
+      {
+        "source": "/api/v1/(.*)",
+        "destination": "./dist/app/server.js"
+      }
+    ],
+    "headers": [
+      {
+        "source": "/(.*)",
+        "headers": [
+          {
+            "key": "Access-Control-Allow-Origin",
+            "value": "*"
+          },
+          {
+            "key": "Access-Control-Allow-Methods",
+            "value": "GET, POST, PUT, PATCH, DELETE"
+          },
+          {
+            "key": "Access-Control-Allow-Headers",
+            "value": "Authorization, Content-Type"
+          },
+          {
+            "key": "cache-control",
+            "value": "s-maxage=1, stale-while-revalidate"
+          }
+        ]
+      }
+    ]
   }
