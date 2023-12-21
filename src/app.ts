@@ -1,6 +1,6 @@
 import express, { Application, Request, Response } from "express";
 import cors from "cors";
-// import userRoute from "./app/Modules/User/user.router";
+import userRoute from "./app/Modules/User/user.router";
 
 const app: Application = express();
 
@@ -14,9 +14,9 @@ app.use(express.json());
 app.use(cors());
 
 //routing
-// app.use("/api/users", userRoute);
+app.use("/api/users", userRoute);
 
-// app.get("/", rootRoute);
+app.get("/", rootRoute);
 
 //todo implement 404 route here
 // app.get("*",)
