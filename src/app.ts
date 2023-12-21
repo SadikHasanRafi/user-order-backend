@@ -1,24 +1,24 @@
-import express, { Application, Request, Response } from "express"
-import cors from "cors"
-import userRoute from "./app/Modules/User/user.router"
+import express, { Application, Request, Response } from "express";
+import cors from "cors";
+// import userRoute from "./app/Modules/User/user.router";
 
-const app: Application = express()
+const app: Application = express();
 
 //root route setup
 const rootRoute = async (req: Request, res: Response) => {
-  res.send("Hello from root directory")
-}
+  res.send("Hello from root directory");
+};
 
 //parser
-app.use(express.json())
-app.use(cors())
+app.use(express.json());
+app.use(cors());
 
 //routing
-app.use("/api/users", userRoute)
+// app.use("/api/users", userRoute);
 
-app.get("/", rootRoute)
+// app.get("/", rootRoute);
 
 //todo implement 404 route here
 // app.get("*",)
 
-export default app
+export default app;

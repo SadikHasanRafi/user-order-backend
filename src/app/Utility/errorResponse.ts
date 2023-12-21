@@ -11,5 +11,5 @@ export const errorMessageForServer = (
       code: code,
       description: description,
     },
-  }
-}
+  };
+};

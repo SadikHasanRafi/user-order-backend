@@ -7,5 +7,5 @@ export const successResponseForOperation = (
     success: success,
     message: message,
     data: data,
-  }
-}
+  };
+};
